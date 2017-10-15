@@ -3,15 +3,22 @@
 
 class tokendownloader {
 
-	public function __contruct() {
+
+	/**
+	* __construct to start session
+	*/
+	public function __construct() {
 		//start session if not started already
 		if (session_status() == PHP_SESSION_NONE) session_start();
 	}
+
+	/**
+	* @param $file : file to download
+	*/
 	public function download($file="") {
 
 
 		if (!$this->hasToken($file)) return false;
-
 
 		//has token procced to download.
 	    header('Content-Description: File Transfer');
@@ -28,10 +35,17 @@ class tokendownloader {
 
 	}
 
+	/**
+	* @param $file : file to download
+	*/
 	public function setToken($file="") {
 		$_SESSION['tokendownloader'][] = $file;
 	}
 
+
+	/**
+	* @param $file : file to download
+	*/
 	public function hasToken($file="") {
 		if (!isset($_SESSION['tokendownloader'])) return false;
 
